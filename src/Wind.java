@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -57,17 +55,16 @@ public class Wind extends Position {
         };
         int[] minimums = {-100, -100, 0};
         int[] maximums = {100, 100, 100};
-        List<Integer> boundedValues = IntStream.range(0, values.length)
+        int[] boundedValues = IntStream.range(0, values.length)
             .map(index -> {
                 int roundedValue = (int) Math.round(values[index]);
                 return Math.max(minimums[index], Math.min(roundedValue, maximums[index]));
             })
-            .boxed()
-            .collect(Collectors.toList());
+            .toArray();
 
-        this.x = boundedValues.get(0);
-        this.y = boundedValues.get(1);
-        this.windPower = boundedValues.get(2);
+        this.x = boundedValues[0];
+        this.y = boundedValues[1];
+        this.windPower = boundedValues[2];
     }
 
     /** Reserved for automatic wind changes during a simulation update. */
