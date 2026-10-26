@@ -56,6 +56,7 @@ public class Wind extends Position {
         int[] minimums = {-100, -100, 0};
         int[] maximums = {100, 100, 100};
         int[] boundedValues = IntStream.range(0, values.length)
+            .parallel()
             .map(index -> {
                 int roundedValue = (int) Math.round(values[index]);
                 return Math.max(minimums[index], Math.min(roundedValue, maximums[index]));
